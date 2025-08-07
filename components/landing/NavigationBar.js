@@ -1,194 +1,113 @@
-/* /components/common/NavigationBar.js */
 import React, { useState } from 'react';
 import {
   Box,
   IconButton,
   Link,
-  Typography,
+  Drawer,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-const NAVBAR_HEIGHT = '100px';
-//const NAVBAR_BG = 'rgba(28, 63, 148,0.75)';
-const NAVBAR_BG = 'rgba(0,0,0,0.5)';
-const NAVBAR_TEXT_COLOR = '#ffffff';
-const NAVBAR_HOVER_COLOR = '#EB602F';
-const NAVBAR_FONT_FAMILY = '"Work Sans", sans-serif';
-const NAVBAR_ELEVATION = '0 4px 10px rgba(0,0,0,0.25)';
-
-const NavbarContainer = styled(Box)(() => ({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: 1100,
-  width: '100%',
-  backgroundColor: NAVBAR_BG,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  height: NAVBAR_HEIGHT,
-  boxShadow: NAVBAR_ELEVATION,
-  padding: '0 2rem',
-}));
-
-const LinksContainer = styled('nav')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(4),
-  [theme.breakpoints.down('md')]: {
-    display: 'none',
-  },
-}));
-
-const NavLink = styled(Link)(() => ({
-  textDecoration: 'none',
-  color: NAVBAR_TEXT_COLOR,
-  fontWeight: 600,
-  fontFamily: NAVBAR_FONT_FAMILY,
-  position: 'relative',
-  transition: 'color 0.3s, transform 0.3s',
-  fontSize: '1.2rem',
-
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    width: '0%',
-    height: '3px',
-    bottom: '-4px',
-    left: '0',
-    backgroundColor: NAVBAR_HOVER_COLOR,
-    transition: 'width 0.3s',
-  },
-  '&:hover': {
-    color: NAVBAR_HOVER_COLOR,
-    transform: 'translateX(4px)',
-    '&::after': {
-      width: '100%',
-    },
-  },
-}));
-
-const BurgerMenuContainer = styled(Box)(() => ({
-  display: 'none',
-  '@media (max-width: 900px)': {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: 1,
-  },
-}));
-
-const MobileMenuOverlay = styled(Box)(() => ({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100vh',
-  backgroundColor: 'rgba(0,0,0,0.5)',
-  backdropFilter: 'blur(4px)',
-  display: 'flex',
-  justifyContent: 'flex-end',
-  zIndex: 1200,
-}));
-
-const MobileMenuContainer = styled(Box)(() => ({
-  width: '70%',
-  maxWidth: '300px',
-  height: '100%',
-  backgroundColor: '#ffffff',
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '2rem 1rem',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-}));
-
-const MobileNavLink = styled(Link)(() => ({
-  textDecoration: 'none',
-  color: NAVBAR_TEXT_COLOR,
-  fontSize: '1.2rem',
-  fontWeight: 600,
-  fontFamily: NAVBAR_FONT_FAMILY,
-  marginBottom: '1.5rem',
-  position: 'relative',
-  transition: 'color 0.3s, transform 0.3s',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    width: '0%',
-    height: '3px',
-    bottom: '-4px',
-    left: '0',
-    backgroundColor: NAVBAR_HOVER_COLOR,
-    transition: 'width 0.3s',
-  },
-  '&:hover': {
-    color: NAVBAR_HOVER_COLOR,
-    transform: 'translateX(4px)',
-    '&::after': {
-      width: '100%',
-    },
-  },
-}));
+const navItems = [
+  { label: 'Inicio', href: '#hero-section' },
+  { label: 'Nosotros', href: '#about-section' },
+  { label: 'Servicios', href: '#services-section' },
+  { label: 'FAQ', href: '#faq-section' },
+  { label: 'Contacto', href: '#footer-section' },
+];
 
 export default function NavigationBar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const navItems = [
-    { label: 'Inicio', href: '#hero-section' },
-    { label: 'Nosotros', href: '#about-section' },
-    { label: 'Servicios', href: '#services-section' },
-    //{ label: 'Planes', href: '#pricing' },
-    { label: 'FAQ', href: '#faq-section' },
-    { label: 'Contacto', href: '#footer-section' },
-  ];
-
-  const toggleMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const commonLinkStyles = {
+    textDecoration: 'none',
+    color: '#102346',
+    fontWeight: 600,
+    fontSize: '1.2rem',
+    fontFamily: '"Poppins", sans-serif',
+    transition: 'all 0.3s',
+    '&:hover': {
+      color: '#EB602F',
+      transform: 'translateX(4px)',
+    },
   };
 
   return (
-    <NavbarContainer>
-      <img
+    <Box
+      component="header"
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100px',
+        px: 4,
+        bgcolor: 'rgba(255,255,255,0.95)',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.25)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        zIndex: 1100,
+      }}
+    >
+      {/* Logo */}
+      <Box
+        component="img"
         src="/imagenes/1x/logo-1r.png"
         alt="Logo SoftiC"
-        style={{ height: '110px' }}
+        sx={{ height: '100px' }}
       />
 
-      <LinksContainer>
-        {navItems.map((item, index) => (
-          <NavLink key={index} href={item.href}>
-            {item.label}
-          </NavLink>
-        ))}
-      </LinksContainer>
-
-      <BurgerMenuContainer>
-        <IconButton onClick={toggleMenu}>
-          {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-        </IconButton>
-      </BurgerMenuContainer>
-
-      {isMobile && mobileMenuOpen && (
-        <MobileMenuOverlay onClick={toggleMenu}>
-          <MobileMenuContainer onClick={(e) => e.stopPropagation()}>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-              <IconButton onClick={toggleMenu}>
-                <CloseIcon />
-              </IconButton>
-            </Box>
-            {navItems.map((item, index) => (
-              <MobileNavLink key={index} href={item.href} onClick={toggleMenu}>
-                {item.label}
-              </MobileNavLink>
-            ))}
-          </MobileMenuContainer>
-        </MobileMenuOverlay>
+      {/* Enlaces de navegación */}
+      {!isMobile && (
+        <Box sx={{ display: 'flex', gap: 4 }}>
+          {navItems.map((item) => (
+            <Link key={item.label} href={item.href} sx={commonLinkStyles}>
+              {item.label}
+            </Link>
+          ))}
+        </Box>
       )}
-    </NavbarContainer>
+
+      {/* Botón de menú móvil */}
+      {isMobile && (
+        <IconButton onClick={() => setOpen(true)}>
+          <MenuIcon />
+        </IconButton>
+      )}
+
+      {/* Drawer móvil */}
+      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+        <Box
+          sx={{
+            width: 250,
+            height: '100%',
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Box sx={{ alignSelf: 'flex-end' }}>
+            <IconButton onClick={() => setOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              sx={{ ...commonLinkStyles, mb: 2 }}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </Box>
+      </Drawer>
+    </Box>
   );
 }

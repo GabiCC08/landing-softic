@@ -7,24 +7,8 @@
   --color-primary: #d62f1f; /* Rojo-naranja del cohete */
   --color-secondary: #0d2d61; /* Azul oscuro de la bombilla */
   --color-primary-light: #ff6040; /* Tono más claro del rojo principal */
-  --color-primary-dark: #9a2216; /* Rojo-naranja más oscuro */
-  --color-secondary-light: #375a9e; /* Azul medio para fondos */
-  --color-secondary-dark: #061a34; /* Azul profundo para acentos */
-  --color-bg-light: #fdfdfd; /* Casi blanco para fondo limpio */
-  --color-bg-default: #ffffff; /* Blanco puro */
-  --color-bg-dark: #f2f2f2; /* Gris muy claro */
   --color-text-primary: #202020; /* Texto oscuro */
   --color-text-secondary: #4d4d4d; /* Texto secundario */
-
-  --font-family-base: 'Work Sans', sans-serif;
-  --font-size-base: 16px;
-
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 3rem;
-  --spacing-xl: 4rem;
-
   --transition-fast: 0.2s ease-in-out;
   --transition-base: 0.3s ease;
 }
@@ -40,13 +24,9 @@
 
 html,
 body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  background-color: var(--color-bg-light);
-  color: var(--color-text-primary);
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #111;
 }
 
 /* ---------------------------------------------------------

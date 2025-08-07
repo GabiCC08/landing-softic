@@ -8,22 +8,10 @@ export default function MyDocument() {
       <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-        {/*
-          Permitir que recursos de orígenes externos se carguen
-          sin ser bloqueados por COEP/COOP.
-          "unsafe-none" = desactiva dichas restricciones.
-          Ajusta según tus necesidades de seguridad.
-        */}
-        <meta httpEquiv="Cross-Origin-Opener-Policy" content="unsafe-none" />
-        <meta httpEquiv="Cross-Origin-Embedder-Policy" content="unsafe-none" />
-
-        {/*
-          Preconnect y dns-prefetch a Unsplash
-          (o cualquier otro host) para acelerar la carga.
-        */}
-        <link rel="preconnect" href="https://source.unsplash.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://source.unsplash.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

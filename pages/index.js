@@ -7,7 +7,7 @@ import NavigationBar from '../components/landing/NavigationBar';
 import HeroSection from '../components/landing/HeroSection';
 import AboutSection from '../components/landing/AboutSection';
 import ServicesSection from '../components/landing/ServicesSection';
-import PlansSection from '../components/landing/PlansSection';
+//import PlansSection from '../components/landing/PlansSection';
 import FaqSection from '../components/landing/FaqSection';
 import FooterSection from '../components/landing/FooterSection';
 
