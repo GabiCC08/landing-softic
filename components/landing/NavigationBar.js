@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   IconButton,
@@ -20,8 +20,18 @@ const navItems = [
 
 export default function NavigationBar() {
   const [open, setOpen] = useState(false);
+  const [isTop, setIsTop] = useState(true);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Escucha del scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsTop(window.scrollY <= 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const commonLinkStyles = {
     textDecoration: 'none',
@@ -36,6 +46,16 @@ export default function NavigationBar() {
     },
   };
 
+  const handleScroll = (id) => {
+    const yOffset = -62;
+    const element = document.getElementById(id);
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <Box
       component="header"
@@ -46,12 +66,13 @@ export default function NavigationBar() {
         width: '100%',
         height: '100px',
         px: 4,
-        bgcolor: 'rgba(255,255,255,0.95)',
-        boxShadow: '0 4px 10px rgba(0,0,0,0.25)',
+        bgcolor: isTop ? '#ffffff' : 'rgba(255,255,255,0.9)',
+        boxShadow: isTop ? 'none' : '0 4px 10px rgba(0,0,0,0.25)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         zIndex: 1100,
+        transition: 'background-color 0.3s, box-shadow 0.3s',
       }}
     >
       {/* Logo */}
@@ -59,16 +80,28 @@ export default function NavigationBar() {
         component="img"
         src="/imagenes/1x/logo-1r.png"
         alt="Logo SoftiC"
-        sx={{ height: '100px' }}
+        sx={{
+          height: '100px',
+          filter:
+            '  drop-shadow(0 0 2px white) drop-shadow(0 0 4px white) drop-shadow(0 0 6px white) drop-shadow(0 0 8px white)',
+        }}
       />
 
-      {/* Enlaces de navegación */}
       {!isMobile && (
         <Box sx={{ display: 'flex', gap: 4 }}>
           {navItems.map((item) => (
-            <Link key={item.label} href={item.href} sx={commonLinkStyles}>
+            <Box
+              key={item.label}
+              onClick={() => handleScroll(item.href.replace('#', ''))}
+              sx={{
+                cursor: 'pointer',
+                ...commonLinkStyles,
+                filter:
+                  'drop-shadow(0 0 2px white) drop-shadow(0 0 4px white) drop-shadow(0 0 6px white)',
+              }}
+            >
               {item.label}
-            </Link>
+            </Box>
           ))}
         </Box>
       )}
@@ -97,14 +130,16 @@ export default function NavigationBar() {
             </IconButton>
           </Box>
           {navItems.map((item) => (
-            <Link
+            <Box
               key={item.label}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              sx={{ ...commonLinkStyles, mb: 2 }}
+              onClick={() => {
+                handleScroll(item.href.replace('#', ''));
+                setOpen(false);
+              }}
+              sx={{ cursor: 'pointer', ...commonLinkStyles, mb: 2 }}
             >
               {item.label}
-            </Link>
+            </Box>
           ))}
         </Box>
       </Drawer>

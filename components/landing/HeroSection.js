@@ -29,9 +29,9 @@ const FEATURES = [
     icon: (
       <SpeedIcon sx={{ color: 'var(--color-primary)', fontSize: '2rem' }} />
     ),
-    title: 'Acompañamiento real y personalizado',
+    title: 'Acompañamiento personalizado',
     description:
-      'Te atendemos con personas reales, siempre que lo necesites, sin complicaciones.',
+      'Te atendemos personas reales, siempre que lo necesites, sin complicaciones.',
   },
 ];
 

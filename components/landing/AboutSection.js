@@ -42,7 +42,7 @@ export default function AboutSection() {
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: '#eb612f75',
+        background: 'linear-gradient(to bottom, #D62F1F, #F47621, #FDB678)',
       }}
     >
       <Box sx={{ position: 'absolute', top: 0, width: '100%', zIndex: -1 }}>
@@ -60,9 +60,8 @@ export default function AboutSection() {
 
       <Box
         sx={{
-          pt: { xs: 6, md: 10 },
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
+          px: 20,
+          py: 10,
           borderRadius: '0 0 50% 50% / 0 0 10% 10%',
           backgroundColor: 'var(--color-bg-default)',
         }}
@@ -75,8 +74,7 @@ export default function AboutSection() {
               textAlign: 'center',
               fontWeight: 'bold',
               mb: 4,
-              color: 'var(--color-primary)',
-              fontFamily: 'var(--font-family-base)',
+              color: '#fff',
             }}
           >
             Conoce Sobre Nosotros
@@ -91,9 +89,6 @@ export default function AboutSection() {
               margin: '0 auto',
               textAlign: 'center',
               mb: 6,
-              color: 'var(--color-text-secondary)',
-              fontSize: '1.1rem',
-              fontFamily: 'var(--font-family-base)',
             }}
           >
             Somos una microempresa especializada en soluciones tecnológicas a

@@ -3,56 +3,43 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import CampaignIcon from '@mui/icons-material/Campaign';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
+import {
+  LocalHospital as LocalHospitalIcon,
+  Campaign as CampaignIcon,
+  Assessment as AssessmentIcon,
+  PrecisionManufacturing as PrecisionManufacturingIcon,
+} from '@mui/icons-material';
+
+const servicesData = [
+  {
+    Icon: LocalHospitalIcon,
+    title: 'Diseño UI/UX',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    Icon: CampaignIcon,
+    title: 'Publicidad Digital',
+    description:
+      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    Icon: AssessmentIcon,
+    title: 'SEO para Clínicas',
+    description:
+      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+  },
+  {
+    Icon: PrecisionManufacturingIcon,
+    title: 'Automatización de Procesos',
+    description:
+      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  },
+];
+
+const MotionBox = motion(Box);
 
 export default function ServicesSection() {
-  const servicesData = [
-    {
-      icon: (
-        <LocalHospitalIcon
-          fontSize="large"
-          sx={{ color: 'var(--color-primary)' }}
-        />
-      ),
-      title: 'Diseño UI/UX',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      icon: (
-        <CampaignIcon fontSize="large" sx={{ color: 'var(--color-primary)' }} />
-      ),
-      title: 'Publicidad Digital',
-      description:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    },
-    {
-      icon: (
-        <AssessmentIcon
-          fontSize="large"
-          sx={{ color: 'var(--color-primary)' }}
-        />
-      ),
-      title: 'SEO para Clínicas',
-      description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    },
-    {
-      icon: (
-        <PrecisionManufacturingIcon
-          fontSize="large"
-          sx={{ color: 'var(--color-primary)' }}
-        />
-      ),
-      title: 'Automatización de Procesos',
-      description:
-        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-  ];
-
   return (
     <Box
       component="section"
@@ -66,11 +53,13 @@ export default function ServicesSection() {
         zIndex: 1,
       }}
     >
-      <motion.div
+      {/* Título */}
+      <MotionBox
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        mb={4}
       >
         <Typography
           variant="h4"
@@ -78,27 +67,27 @@ export default function ServicesSection() {
           sx={{
             textAlign: 'center',
             fontWeight: 'bold',
-            mb: 4,
             color: 'var(--color-primary)',
           }}
         >
           Nuestros Servicios
         </Typography>
-      </motion.div>
+      </MotionBox>
 
-      <motion.div
+      {/* Subtítulo */}
+      <MotionBox
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
+        mb={6}
+        maxWidth={800}
+        mx="auto"
       >
         <Typography
           variant="body1"
           sx={{
-            maxWidth: 800,
-            margin: '0 auto',
             textAlign: 'center',
-            mb: 6,
             color: 'var(--color-text-secondary)',
             fontSize: '1.1rem',
           }}
@@ -106,9 +95,9 @@ export default function ServicesSection() {
           Descubre cómo podemos ayudarte a destacar en el mundo digital y
           conectar con los pacientes ideales para tu especialidad.
         </Typography>
-      </motion.div>
+      </MotionBox>
 
-      {/* Contenedor flex para servicios */}
+      {/* Lista de servicios */}
       <Box
         sx={{
           display: 'flex',
@@ -117,53 +106,50 @@ export default function ServicesSection() {
           gap: { xs: 3, md: 6 },
         }}
       >
-        {servicesData.map((service, idx) => (
-          <motion.div
-            key={idx}
+        {servicesData.map(({ Icon, title, description }, idx) => (
+          <MotionBox
+            key={title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
             viewport={{ once: true }}
+            flex="1 1 250px"
+            maxWidth={280}
+            textAlign="center"
+            p={4}
+            bgcolor="var(--color-bg-default)"
+            borderRadius={4}
+            boxShadow="0px 4px 20px rgba(0,0,0,0.04)"
+            sx={{
+              transition: 'transform 0.3s',
+              '&:hover': { transform: 'translateY(-8px)' },
+              color: 'var(--color-text-primary)',
+              minHeight: 280,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+            }}
           >
-            <Box
+            <Box sx={{ mb: 2 }}>
+              <Icon fontSize="large" sx={{ color: 'var(--color-primary)' }} />
+            </Box>
+            <Typography
+              variant="h6"
               sx={{
-                flex: '1 1 250px',
-                maxWidth: 280,
-                textAlign: 'center',
-                p: 4,
-                backgroundColor: 'var(--color-bg-default)',
-                borderRadius: 4,
-                boxShadow: '0px 4px 20px rgba(0,0,0,0.04)',
-                transition: 'transform 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                },
-                color: 'var(--color-text-primary)',
-                minHeight: 280,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
+                fontWeight: 'bold',
+                mb: 1,
+                color: 'var(--color-primary-dark)',
               }}
             >
-              <Box sx={{ mb: 2 }}>{service.icon}</Box>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 'bold',
-                  mb: 1,
-                  color: 'var(--color-primary-dark)',
-                }}
-              >
-                {service.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: 'var(--color-text-secondary)' }}
-              >
-                {service.description}
-              </Typography>
-            </Box>
-          </motion.div>
+              {title}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: 'var(--color-text-secondary)' }}
+            >
+              {description}
+            </Typography>
+          </MotionBox>
         ))}
       </Box>
     </Box>
