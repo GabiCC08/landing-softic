@@ -4,36 +4,29 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
-  LocalHospital as LocalHospitalIcon,
-  Campaign as CampaignIcon,
-  Assessment as AssessmentIcon,
-  PrecisionManufacturing as PrecisionManufacturingIcon,
+  LocalHospital as LogisticsIcon,
+  Campaign as LandingIcon,
+  Assessment as AppsIcon,
 } from '@mui/icons-material';
 
 const servicesData = [
   {
-    Icon: LocalHospitalIcon,
-    title: 'Diseño UI/UX',
+    Icon: LogisticsIcon,
+    title: 'Sistema de Logística Inteligente',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Gestiona y optimiza tus entregas con seguimiento en tiempo real, control del trayecto y monitoreo del avance de cada envío. Ideal para pequeñas y medianas empresas que buscan eficiencia y confiabilidad, sin complicaciones técnicas.',
   },
   {
-    Icon: CampaignIcon,
-    title: 'Publicidad Digital',
+    Icon: LandingIcon,
+    title: 'Desarrollo de Landing Pages Profesionales',
     description:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Creamos páginas informativas de alto impacto que comunican claramente tu propuesta de valor, generan confianza en tus clientes y potencian tu presencia digital. Diseñado para emprendedores que quieren destacar con tecnología, sin invertir grandes recursos.',
   },
   {
-    Icon: AssessmentIcon,
-    title: 'SEO para Clínicas',
+    Icon: AppsIcon,
+    title: 'Desarrollo de Aplicaciones y Sistemas Robustos',
     description:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    Icon: PrecisionManufacturingIcon,
-    title: 'Automatización de Procesos',
-    description:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'Diseñamos aplicaciones móviles y sistemas complejos, escalables y seguros, adaptados a empresas en crecimiento o consolidadas que necesitan automatizar procesos críticos, optimizar la gestión de personal, inventario y operaciones, y mantener la eficiencia a gran escala.',
   },
 ];
 
@@ -45,12 +38,10 @@ export default function ServicesSection() {
       component="section"
       id="services-section"
       sx={{
-        position: 'relative',
-        py: { xs: 8, md: 10 },
-        px: { xs: 2, md: 6 },
+        py: { xs: 8, md: 12 },
+        px: { xs: 3, md: 6 },
         background:
-          'linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-bg-default) 100%)',
-        zIndex: 1,
+          'linear-gradient(135deg, var(--color-bg-light), var(--color-bg-default))',
       }}
     >
       {/* Título */}
@@ -59,7 +50,7 @@ export default function ServicesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        mb={4}
+        mb={3}
       >
         <Typography
           variant="h4"
@@ -75,7 +66,7 @@ export default function ServicesSection() {
       </MotionBox>
 
       {/* Subtítulo */}
-      <MotionBox
+      {/* <MotionBox
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -92,12 +83,14 @@ export default function ServicesSection() {
             fontSize: '1.1rem',
           }}
         >
-          Descubre cómo podemos ayudarte a destacar en el mundo digital y
-          conectar con los pacientes ideales para tu especialidad.
+          Impulsamos tu negocio con soluciones tecnológicas diseñadas para
+          crecer contigo. Desde logística eficiente hasta aplicaciones móviles
+          robustas, tenemos todo para llevar tu emprendimiento al siguiente
+          nivel.
         </Typography>
-      </MotionBox>
+      </MotionBox> */}
 
-      {/* Lista de servicios */}
+      {/* Cards de servicios */}
       <Box
         sx={{
           display: 'flex',
@@ -114,25 +107,26 @@ export default function ServicesSection() {
             transition={{ duration: 0.5, delay: idx * 0.1 }}
             viewport={{ once: true }}
             flex="1 1 250px"
-            maxWidth={280}
+            maxWidth={300}
             textAlign="center"
-            p={4}
+            p={{ xs: 3, md: 4 }}
             bgcolor="var(--color-bg-default)"
             borderRadius={4}
-            boxShadow="0px 4px 20px rgba(0,0,0,0.04)"
+            boxShadow="0px 4px 20px rgba(0,0,0,0.25)"
             sx={{
               transition: 'transform 0.3s',
               '&:hover': { transform: 'translateY(-8px)' },
-              color: 'var(--color-text-primary)',
-              minHeight: 280,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-start',
+              alignItems: 'center', // <- esto centra icon, título y texto
+              minHeight: 280,
             }}
           >
-            <Box sx={{ mb: 2 }}>
-              <Icon fontSize="large" sx={{ color: 'var(--color-primary)' }} />
-            </Box>
+            <Icon
+              fontSize="large"
+              sx={{ color: 'var(--color-primary)', mb: 2 }}
+            />
             <Typography
               variant="h6"
               sx={{

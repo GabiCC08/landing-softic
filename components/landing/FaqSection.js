@@ -12,42 +12,68 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 
+const MotionBox = motion(Box);
+
+const faqs = [
+  {
+    question:
+      '¿Mi negocio es pequeño, puedo implementar tecnología sin complicaciones?',
+    answer:
+      'Sí. Nuestras soluciones están diseñadas para microempresas y emprendedores, fáciles de implementar y adaptables a tu operación diaria sin necesidad de personal técnico avanzado.',
+  },
+  {
+    question:
+      '¿Cuánto tiempo tardaré en ver resultados con la tecnología en mi negocio?',
+    answer:
+      'Depende del servicio y la estrategia. Por ejemplo, un sistema de logística o una landing page puede empezar a generar beneficios visibles en pocas semanas, mientras que procesos más complejos requieren 2-3 meses de integración y optimización.',
+  },
+  {
+    question:
+      '¿Necesito conocimientos técnicos para usar los sistemas o apps que desarrollan?',
+    answer:
+      'No, nuestros productos son intuitivos y fáciles de usar. Además, brindamos capacitación y soporte continuo para que puedas sacar el máximo provecho sin depender de personal especializado.',
+  },
+  {
+    question:
+      '¿Puedo escalar o mejorar mi sistema a medida que mi negocio crece?',
+    answer:
+      'Sí. Todos nuestros sistemas y aplicaciones son escalables. A medida que tu empresa crece, podemos agregar nuevas funcionalidades, automatizar más procesos y mejorar la eficiencia de tu operación.',
+  },
+  {
+    question: '¿Qué pasa si no tengo sitio web o presencia digital?',
+    answer:
+      'Podemos crear desde cero tu página web o landing page profesional, optimizada para atraer clientes y mostrar tu negocio de manera confiable y atractiva.',
+  },
+  {
+    question:
+      '¿Cómo se asegura que mi información y datos de clientes estén protegidos?',
+    answer:
+      'Todos nuestros sistemas cumplen con buenas prácticas de seguridad y confidencialidad. Protegemos tu información y la de tus clientes con protocolos modernos y respaldos seguros.',
+  },
+  {
+    question:
+      '¿Vale la pena invertir en tecnología si mi negocio es muy pequeño?',
+    answer:
+      'Sí. Incluso pequeñas mejoras tecnológicas pueden optimizar tus procesos, ahorrar tiempo y destacar frente a la competencia. Las soluciones están diseñadas para ser accesibles y rentables desde el primer día.',
+  },
+];
+
 export default function FaqSection() {
   const theme = useTheme();
-
-  const faqs = [
-    {
-      question: '¿Cuánto tarda en dar resultados el marketing médico?',
-      answer:
-        'Dependiendo del plan y la estrategia, los resultados pueden comenzar a verse en unas pocas semanas. Sin embargo, el posicionamiento sólido lleva al menos 2-3 meses de trabajo constante.',
-    },
-    {
-      question: '¿Puedo cambiar de plan más adelante?',
-      answer:
-        'Sí, puedes escalar a un plan superior en cualquier momento. Nos adaptamos a la etapa de crecimiento de tu práctica médica.',
-    },
-    {
-      question: '¿Qué pasa si no tengo sitio web?',
-      answer:
-        'Podemos crear uno para ti o rediseñar el que tengas, optimizado para atraer y retener pacientes.',
-    },
-  ];
 
   return (
     <Box
       component="section"
       id="faq-section"
-      sx={{
-        py: { xs: 8, md: 10 },
-        backgroundColor: '#ffffff',
-        position: 'relative',
-      }}
+      sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f5f5f5' }}
     >
-      <motion.div
+      {/* Título */}
+      <MotionBox
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        mb={4}
       >
         <Typography
           variant="h4"
@@ -55,45 +81,42 @@ export default function FaqSection() {
           sx={{
             textAlign: 'center',
             fontWeight: 'bold',
-            mb: 4,
-            color: theme.palette.primary.main,
+            color: 'var(--color-primary)',
           }}
         >
           Preguntas Frecuentes
         </Typography>
-      </motion.div>
+      </MotionBox>
 
-      <Box sx={{ maxWidth: '800px', margin: '0 auto', px: 2 }}>
-        {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
+      {/* FAQs */}
+      <Box sx={{ maxWidth: 800, mx: 'auto', px: 2 }}>
+        {faqs.map((faq, idx) => (
+          <MotionBox
+            key={idx}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
             viewport={{ once: true }}
+            mb={2}
           >
             <Accordion
               sx={{
-                mb: 2,
                 boxShadow: '0px 4px 20px rgba(0,0,0,0.04)',
                 borderRadius: 2,
-                overflow: 'hidden',
               }}
             >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{ color: theme.palette.primary.main }} />}
-              >
-                <Typography sx={{ fontWeight: 'bold', color: theme.palette.text.primary }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography
+                  sx={{ fontWeight: 'bold', color: 'var(--color-secondary)' }}
+                >
                   {faq.question}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography variant="body2" color="text.secondary">
-                  {faq.answer}
-                </Typography>
+                <Typography variant="body2">{faq.answer}</Typography>
               </AccordionDetails>
             </Accordion>
-          </motion.div>
+          </MotionBox>
         ))}
       </Box>
     </Box>

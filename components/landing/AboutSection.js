@@ -60,9 +60,12 @@ export default function AboutSection() {
 
       <Box
         sx={{
-          px: 20,
-          py: 10,
-          borderRadius: '0 0 50% 50% / 0 0 10% 10%',
+          px: { xs: 4, md: 20 }, // menos padding en xs
+          py: { xs: 6, md: 10 },
+          borderRadius: {
+            xs: '0 0 30% 30% / 0 0 8% 8%',
+            md: '0 0 50% 50% / 0 0 10% 10%',
+          },
           backgroundColor: 'var(--color-bg-default)',
         }}
       >
@@ -114,7 +117,7 @@ export default function AboutSection() {
               <Box
                 sx={{
                   textAlign: 'center',
-                  p: 4,
+                  p: { xs: 2, md: 4 }, // menos padding en móvil
                   borderRadius: 4,
                   backgroundColor: '#fff',
                   boxShadow: '0px 4px 20px rgba(0,0,0,0.04)',
@@ -124,10 +127,11 @@ export default function AboutSection() {
                 <Icon
                   sx={{
                     color: 'var(--color-primary)',
-                    fontSize: '3rem',
+                    fontSize: { xs: '2rem', md: '3rem' }, // icono más pequeño en móvil
                     mb: 2,
                   }}
                 />
+
                 <Typography
                   variant="h6"
                   sx={{
